@@ -53,6 +53,20 @@ Use **one program at a time**. To switch to the demo or another script, disconne
 12V and external 5V while keeping USB connected, run the new file, establish idle,
 then reconnect external 5V and 12V. Do not run a host `test_*.py` file in Thonny.
 
+## Save on the Pico (optional)
+
+In Thonny select **View → Files** after choosing the MicroPython Pico interpreter.
+The file panel shows both the computer and Raspberry Pi Pico. Open `boot.py` on
+this computer, then **File → Save as → Raspberry Pi Pico → boot.py**. Back up any
+existing file before replacing it.
+
+Save either `rev_a_system_check.py` or `rev_a_demo.py` onto the Pico as **main.py**
+if you want that program to start after reset. Only one can have that name. Both
+wait for a serial prompt before running a sequence; neither auto-starts the
+lights. Keep the other program under its original name if desired, or simply
+run it from the computer in Thonny. Do not copy the `tests/` folder to the Pico.
+USB must still be connected first and removed last on the modified controller.
+
 ## Diagnostic commands
 
 After running `rev_a_system_check.py` and pressing Enter:
@@ -122,20 +136,6 @@ repaired fan-power trace, startup current, loaded voltage drop and temperatures
 still need validation. There is no software voltage/current/temperature sensor,
 hardware interlock or guaranteed hardware default-off. Host tests do not validate
 the actual PWM peripheral, damaged copper, supply protection or wiring.
-
-## Additional standalone diagnostics
-
-Keep these for targeted checks and reproducing earlier bench results. Their
-command names are local to each file, not interchangeable with the system check.
-
-| File | Commands/purpose |
-| --- | --- |
-| [rev_a_all_fans.py](rev_a_all_fans.py) | `test_fans()` runs R1–R4; `test_3()` is **fans only**, R1–R3, 5 seconds each; `run_fans(1, 10)` runs both R1 fans. |
-| [rev_a_mix_test.py](rev_a_mix_test.py) | Mixing-only `mix(1, 20, 10)`; default ramp 1 second, optional `ramp_seconds=5`. |
-| [rev_a_reactor1_test.py](rev_a_reactor1_test.py) | Older R1 test: `test_fans()`, `check(1)`, `check(2)`. |
-| [rev_a_four_reactor_test.py](rev_a_four_reactor_test.py) | `run_test()` cycles all four ports, both fans + 20%-duty LEDs for 2 seconds each. |
-| [rev_a_led_check.py](rev_a_led_check.py) | `check(1)` through `check(8)`, LEDs individually. |
-| [rev_a_bringup.py](rev_a_bringup.py) | Static controller checks with reactor harnesses disconnected; no LED-enable command. |
 
 ## Developer checks
 

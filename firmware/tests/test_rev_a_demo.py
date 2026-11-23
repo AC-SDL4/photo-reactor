@@ -6,7 +6,7 @@ import runpy
 import sys
 import unittest
 from unittest.mock import patch
-from test_rev_a_reactor1_test import Hardware
+from sim_hardware import Hardware
 
 
 class Demo(unittest.TestCase):
