@@ -60,7 +60,7 @@ class Hardware:
     def sleep_ms(self, duration):
         if self.fail_sleep:
             raise KeyboardInterrupt()
-        for fan_gpio, tach_gpio in ((2, 16), (3, 17)):
+        for fan_gpio, tach_gpio in ((2, 16), (3, 17), (6, 18), (7, 19), (10, 20), (11, 21), (14, 22), (15, 26)):
             pwm = self.pwm.get(fan_gpio)
             duty = (65535 - pwm.duty) / 65535 if pwm else 0
             # 6000RPM * two rising edges/revolution -> 200Hz at full speed.
@@ -82,7 +82,7 @@ class TestReactor1(unittest.TestCase):
         self.output = io.StringIO()
         self.capture = contextlib.redirect_stdout(self.output)
         self.capture.__enter__()
-        self.program = runpy.run_path(str(Path(__file__).with_name('rev_a_reactor1_test.py')))
+        self.program = runpy.run_path(str(Path(__file__).resolve().parents[1].joinpath('rev_a_reactor1_test.py')))
 
     def tearDown(self):
         self.capture.__exit__(None, None, None)

@@ -1,10 +1,10 @@
 """Manual one-second dimmed checks of all eight LEDs, SDL4-0001 Rev A.
 
-Save this file on the Pico as main.py. It starts with every LED OFF and
+Run this file in Thonny. It starts with every LED OFF and
 never lights an LED automatically on boot. In Thonny's Shell call check(1)
 through check(8). Channels 1/2 = reactor 1, 3/4 = reactor 2,
 5/6 = reactor 3, and 7/8 = reactor 4.
-Disconnect 12V before moving cables. Aim LEDs away and observe reflected
+Disconnect 12V, external 5V and USB before moving cables. Aim LEDs away and observe reflected
 light; the dimming setting is not a certified eye-safe viewing level.
 No fans or heatsinks are required for this brief indication
 check; this is not a thermal qualification or permission for continuous use.
@@ -60,5 +60,5 @@ It is NOT a measured 20% optical output or a calibrated LED current.
 
 print("All LEDs OFF. Use check(1) through check(8).")
 print("R1: 1/2; R2: 3/4; R3: 5/6; R4: 7/8.")
-print("Disconnect 12V before moving cables.")
+print("Disconnect 12V, external 5V and USB before moving cables.")
 print("Each check lights one LED briefly, then waits 10 seconds before returning.")

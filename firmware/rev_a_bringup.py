@@ -1,7 +1,7 @@
 """SDL4-0001 Rev A: initial controller checks, with reactor cables unplugged.
 
-Run with MicroPython on the original Pico / Pico H. Save on the Pico as
-main.py so the output states are initialized after a restart.
+Run in Thonny with MicroPython on the original Pico / Pico H. Use boot.py for
+early idle commands; no auto-running main.py is needed for bench checks.
 This deliberately provides NO command to enable an LED.
 GPIO numbers below are GPIO identifiers, not physical header pin numbers.
 """

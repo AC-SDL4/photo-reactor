@@ -6,7 +6,8 @@ Do not save over a working production program without keeping a copy.
 
 CFM-2006CF-060-078-22: 5V, 25kHz PWM here, two tach pulses/revolution.
 First LED board = LED 1 / stir fan; second board = LED 2 / cooling fan.
-JP_FANV must bridge 2-3 (5V). Switch off 12V before changing cables.
+Stock board: JP_FANV 2-3. Modified external-5V board: NO jumper.
+Disconnect 12V, external 5V and USB before changing cables.
 LED checks are fixed, brief indication checks, not thermal qualification.
 """
 from machine import Pin, PWM, disable_irq, enable_irq
@@ -32,7 +33,7 @@ _tach_pins = []
 def all_off():
     """LEDs off; fan PWM commanded 0%. Does not disconnect the fan supply.
 
-Some fans retain a minimum speed at 0% PWM. Disconnect 12V for a physical
+Some fans retain a minimum speed at 0% PWM. Disconnect all supplies for a physical
 power-off. Pin reinitialization removes PWM pin multiplexing on RP2040.
 """
     for outputs, duty in ((_led_pwm, 0), (_fan_pwm, 65535)):
@@ -197,7 +198,7 @@ def main():
     try:
         print("\nSDL4 Rev A -- REACTOR 1 TEST")
         print("All LEDs OFF; fans commanded to 0%.")
-        print("Confirm JP_FANV is 2-3 (5V), both fans are clear, and all wiring is on R1.")
+        print("Verify 5V fan rail: stock selector 2-3; external-5V bypass NO jumper. Wiring on R1.")
         print("Aim LEDs away from your eyes; watch light reflected from a matte surface.")
         print("Connect 12V now. Full test: fans about 30s, then two brief LED checks.")
         command = input("Type TEST and press Enter to start, or Enter to cancel: ").strip().upper()
@@ -213,7 +214,7 @@ def main():
         finally:
             _detach_tach()
     print("Shell commands: test_fans(), check(1), check(2), all_off().")
-    print("Disconnect 12V for a physical power-off or before moving cables.")
+    print("Disconnect 12V, external 5V, then USB before moving cables.")
 
 
 if __name__ == "__main__":
